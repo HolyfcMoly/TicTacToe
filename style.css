@@ -1,0 +1,382 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Arial", sans-serif;
+}
+section {
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    height: 100vh;
+    display: flex; align-items: center;
+    justify-content: center;
+    background: linear-gradient(110deg, #a6329a, #bd2234, #b12bcc, #bd2234, #a6329a);
+    background-size: 700% 700%;
+    animation: bgc 30s linear infinite;
+    overflow: hidden;
+}
+
+.game--container {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    width: 456px;
+    margin: 50px auto;
+}
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Permanent Marker", cursive;
+    width: 150px;
+    height: 150px;
+    box-shadow: 0 0 0 1px #333333;
+    border: 1px solid #333333;
+    cursor: pointer;
+    line-height: 100px;
+    font-size: 60px;
+}
+.game--restart {
+    position: relative;
+    padding: 3px;
+    border-radius: 15px;
+    cursor: pointer;
+    overflow: hidden;
+    border: none;
+}
+.game--restart::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 450%;
+    height: 100%;
+    background-size: 42% 314%;
+    background: linear-gradient(135deg, #d76ce2 0%,#bc1ab1 25%,#f79cfc 35%,#d622d3 64%);
+    animation: borderGradient 1s linear infinite;
+    translate: -5% 0%;
+    animation-play-state: paused;
+}
+.game--restart:hover::before {
+    animation-play-state: running;
+}
+.game--restart span {
+    position: relative;
+    display: block;
+    padding: 15px 30px;
+    background-size: 61% 100%;
+    background-image:  linear-gradient(359deg, #a6329a, #b12bcc);
+    border-radius: 12px;
+}
+
+@keyframes borderGradient {
+    0% {
+        translate: 0% 0%;
+    }
+    100% {
+        translate: -50% 0%;
+    }
+}
+
+.win {
+    background-color: aqua;
+}
+
+.close {
+    content: '';
+    position: absolute;
+    top: 14vh;
+    left: 33vh;
+    animation: close1 5s ease-in-out alternate infinite;
+}
+.close svg {
+    mix-blend-mode:overlay;
+}
+.close:nth-child(2) {
+    top: 3vh;
+    left: 9vh;
+    animation: close2 6s ease-in-out alternate infinite;
+}
+.close:nth-child(3) {
+    top: 52vh;
+    left: 37vh;
+    animation: close3 7s ease-in-out alternate infinite;
+}
+.close:nth-child(4) {
+    top: 41vh;
+    left: 13vh;
+    animation: close4 8s ease-in-out alternate infinite;
+}
+.close:nth-child(5) {
+    top: 77vh;
+    left: 16vh;
+    animation: close5 7.5s ease-in-out alternate infinite;
+}
+.close:nth-child(6) {
+    top: 85vh;
+    left: 43vh;
+    animation: close6 5.8s ease-in-out alternate infinite;
+}
+.close:nth-child(7) {
+    top: 4vh;
+    left: 54vh;
+    animation: close7 8.5s ease-in-out alternate infinite;
+}
+
+.circle {
+    content: '';
+    position: absolute;
+    top: 14vh;
+    left: 145vh;
+    width: 65px;
+    height: 65px;
+    border: 10px solid #f0f0f0;
+    border-radius: 50%;
+    mix-blend-mode:overlay;
+    opacity: 0.2;
+    animation: circle1 5s ease-in-out alternate infinite;
+}
+.circle:nth-child(9) {
+    top: 8vh;
+    left: 117vh;
+    animation: circle9 7s ease-in-out alternate infinite;
+    
+}
+.circle:nth-child(10) {
+    top: 65vh;
+    left: 134vh;
+    animation: circle10 8s ease-in-out alternate infinite;
+
+}
+.circle:nth-child(11) {
+    top: 43vh;
+    left: 157vh;
+    animation: circle11 9s ease-in-out alternate infinite;
+}
+.circle:nth-child(12) {
+    top: 82vh;
+    left: 155vh;
+    animation: circle12 8.5s ease-in-out alternate infinite;
+}
+.circle:nth-child(13) {
+    top: 80vh;
+    left: 110vh;
+    animation: circle13 9.5s ease-in-out alternate infinite;
+}
+.circle:nth-child(14) {
+    top: 37vh;
+    left: 126vh;
+    animation: circle14 7.5s ease-in-out alternate infinite;
+}
+@keyframes bgc {
+    0% {
+        background-position: 0% 50%;
+    }
+    20% {
+        background-position: 40% 50%;
+    }
+    35% {
+        background-position: 65% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    65% {
+        background-position: 65% 50%;
+    }
+    80% {
+        background-position: 40% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+    
+}
+@keyframes close1 {
+    0% {
+        transform: translateZ(0) translateY(0) translateX(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateZ(160px) translateY(-88px) translateX(130px);
+        opacity: 0;
+    }
+}
+@keyframes close2 {
+    0% {
+        transform: translateZ(0) translateY(0) translateX(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateZ(160px) translateY(-13px) translateX(159px);
+        opacity: 0;
+    }
+}
+@keyframes close3 {
+    0% {
+        transform: translateZ(0) translateY(0) translateX(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateZ(160px) translateY(-88px) translateX(130px);
+        opacity: 0;
+    }
+}
+@keyframes close4 {
+    0% {
+        transform: translateZ(0) translateY(0) translateX(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateZ(160px) translateY(-88px) translateX(130px);
+        opacity: 0;
+    }
+}
+@keyframes close5 {
+    0% {
+        transform: translateZ(0) translateY(0) translateX(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateZ(160px) translateY(-88px) translateX(130px);
+        opacity: 0;
+    }
+}
+@keyframes close6 {
+    0% {
+        transform: translateZ(0) translateY(0) translateX(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateZ(160px) translateY(-88px) translateX(130px);
+        opacity: 0;
+    }
+}
+@keyframes close7 {
+    0% {
+        transform: translateZ(0) translateY(0) translateX(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateZ(160px) translateY(-88px) translateX(130px);
+        opacity: 0;
+    }
+}
+
+@keyframes circle1 {
+    0% {
+        transform: translateZ(0) translateY(0) translateX(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateZ(160px) translateY(-88px) translateX(130px);
+        opacity: 0;
+    }
+}
+@keyframes circle9 {
+    0% {
+        transform: translateZ(0) translateY(0) translateX(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateZ(160px) translateY(-88px) translateX(130px);
+        opacity: 0;
+    }
+}
+@keyframes circle10 {
+    0% {
+        transform: translateZ(0) translateY(0) translateX(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateZ(160px) translateY(-88px) translateX(130px);
+        opacity: 0;
+    }
+}
+@keyframes circle11 {
+    0% {
+        transform: translateZ(0) translateY(0) translateX(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateZ(160px) translateY(-88px) translateX(130px);
+        opacity: 0;
+    }
+}
+@keyframes circle12 {
+    0% {
+        transform: translateZ(0) translateY(0) translateX(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateZ(160px) translateY(-88px) translateX(130px);
+        opacity: 0;
+    }
+}
+@keyframes circle13 {
+    0% {
+        transform: translateZ(0) translateY(0) translateX(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateZ(160px) translateY(-88px) translateX(130px);
+        opacity: 0;
+    }
+}
+@keyframes circle14 {
+    0% {
+        transform: translateZ(0) translateY(0) translateX(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateZ(160px) translateY(-88px) translateX(130px);
+        opacity: 0;
+    }
+}
+
