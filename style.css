@@ -41,6 +41,10 @@ section {
     overflow: hidden;
 }
 
+.tic-tac {
+    z-index: 10;
+}
+
 .game--container {
     display: grid;
     grid-template-columns: repeat(3, auto);
@@ -89,6 +93,10 @@ section {
 .game--restart:hover::before {
     animation-play-state: running;
 }
+.game--restart:active {
+    transform: scale(0.96);
+}
+
 .game--restart span {
     position: relative;
     display: block;
@@ -111,23 +119,6 @@ section {
     background: linear-gradient(135deg, #5d4c7f 45%,#4b2431 55%,#98008b 65%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: win 2s linear infinite;
-}
-
-@keyframes win {
-    0% {
-        transform: scale(1);
-        filter: hue-rotate(345deg);
-    }
-    50% {
-        transform: scale(1.05);
-        filter: hue-rotate(386deg);
-
-    }
-    100% {
-        transform: scale(1);
-        filter: hue-rotate(350deg);
-    }
 }
 
 .close {
