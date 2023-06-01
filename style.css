@@ -33,6 +33,7 @@ section {
 .container {
     position: relative;
     height: 100vh;
+    width: 100%;
     display: flex; align-items: center;
     justify-content: center;
     background: linear-gradient(110deg, #a6329a, #bd2234, #b12bcc, #bd2234, #a6329a);
@@ -128,7 +129,7 @@ section {
     left: 33vh;
     width: 100px;
     height: 100px;
-    background: url('/close.svg');
+    background: url('close.svg');
 }
 .close svg {
     mix-blend-mode:overlay;
@@ -200,7 +201,7 @@ section {
 .active-close {
     width: 100px;
     height: 100px;
-    background: url('/close.svg');
+    background: url('close.svg');
     border: none;
     border-radius: 0;
     opacity: 0.7;
