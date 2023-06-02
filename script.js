@@ -185,6 +185,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
         return null;
     }
+    
     function checkBotWin() {
         for (let i = 0; i < winningConditions.length; i++) {
             const [a, b, c] = winningConditions[i];
