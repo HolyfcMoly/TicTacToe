@@ -213,11 +213,11 @@ window.addEventListener("DOMContentLoaded", () => {
             let scaleProgress = progress / duration;
 
             if (progress <= duration / 3.2) {
-                opacityProgress = (progress / (duration / 2)) * 0.2;
-                scaleProgress = (progress / (duration / 2)) * 1;
+                opacityProgress = (progress / (duration / 2)) * 0.5;
+                scaleProgress = (progress / (duration / 2)) * 1.5;
             } else {
-                opacityProgress = (1 - progress / duration) * 0.2;
-                scaleProgress = (1 - progress / duration) * 1;
+                opacityProgress = (1 - progress / duration) * 0.5;
+                scaleProgress = (1 - progress / duration) * 1.5;
             }
             const scaleValue = scaleProgress * (scale - 1) + 1;
 

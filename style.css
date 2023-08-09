@@ -12,7 +12,8 @@ section {
 
 .game--title, .game--status {
     font-size: 46px;
-    background: linear-gradient(135deg, #a902b2 25%,#cc32ee 35%,#8a1ae4 64%);
+    background: rgb(227,135,245);
+    background: linear-gradient(148deg, rgba(227,135,245,0.9809173669467787) 10%, rgba(199,78,238,0.9304971988795518) 49%, rgba(192,0,255,0.9865196078431373) 81%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: title 4s linear infinite;
@@ -35,7 +36,8 @@ section {
     height: 100vh;
     display: flex; align-items: center;
     justify-content: center;
-    background: linear-gradient(110deg, #a6329a, #bd2234, #b12bcc, #bd2234, #a6329a);
+    background: rgb(20,0,36);
+    background: linear-gradient(148deg, rgba(20,0,36,1) 0%, rgba(91,9,121,1) 49%, rgba(68,0,255,1) 100%);
     background-size: 700% 700%;
     animation: bgc 30s linear infinite;
     overflow: hidden;
@@ -58,11 +60,11 @@ section {
     font-family: "Permanent Marker", cursive;
     width: 150px;
     height: 150px;
-    background: linear-gradient(135deg, #5d4c7f 45%,#4b2431 55%,#98008b 65%);
+    background: linear-gradient(135deg, #20122e 45%,#481526 55%,#c416b5 65%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     box-shadow: 5px -5px 14px 4px #8804f1;
-    border: 8px solid #cf14f5;
+    border: 8px solid #9b23b4;
     border-radius: 10px;
     cursor: pointer;
     line-height: 100px;
@@ -102,7 +104,7 @@ section {
     display: block;
     padding: 15px 30px;
     background-size: 61% 100%;
-    background-image:  linear-gradient(359deg, #a6329a, #b12bcc);
+    background-image:  linear-gradient(359deg, #5b1754, #be49d5);
     border-radius: 12px;
 }
 
@@ -128,7 +130,7 @@ section {
     left: 33vh;
     width: 100px;
     height: 100px;
-    background: url('/close.svg');
+    background: url('close.svg');
 }
 .close svg {
     mix-blend-mode:overlay;
@@ -200,7 +202,7 @@ section {
 .active-close {
     width: 100px;
     height: 100px;
-    background: url('/close.svg');
+    background: url('close.svg');
     border: none;
     border-radius: 0;
     opacity: 0.7;
