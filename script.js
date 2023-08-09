@@ -1,30 +1,34 @@
 window.addEventListener("DOMContentLoaded", () => {
     const statusDisplay = document.querySelector(".game--status");
-    let gameActive = true;
-    let currentPlayer = "X";
-    let gameState = ["", "", "", "", "", "", "", "", ""];
-
-    const winningMessage = () => `Player ${currentPlayer} has won!`;
-    const drawMessage = () => `Game ended in a draw!`;
-    const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
-
     const cols = document.querySelectorAll(".cell");
     const close = document.querySelectorAll(".close");
     const circle = document.querySelectorAll(".circle");
     const reset = document.querySelector(".game--restart");
+
+    let gameActive = true;
+    let currentPlayer = "X";
+    let gameState = ["", "", "", "", "", "", "", "", ""];
+    let movePlayer = true;
     let animationId;
+    let isReset = false;
+
+    const winningMessage = () => `Player ${currentPlayer} has won!`;
+    const drawMessage = () => `Game ended in a draw!`;
+    const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
 
     statusDisplay.innerHTML = currentPlayerTurn();
 
     function handleCellPlayed(clickedCell, clickedCellIndex) {
         gameState[clickedCellIndex] = currentPlayer;
         clickedCell.innerHTML = currentPlayer;
+        movePlayer = !movePlayer;
     }
-    
+
     function changedPlayer() {
         currentPlayer = currentPlayer === "X" ? "O" : "X";
         statusDisplay.innerHTML = currentPlayerTurn();
     }
+
     const winningConditions = [
         [0, 1, 2],
         [3, 4, 5],
@@ -95,44 +99,117 @@ window.addEventListener("DOMContentLoaded", () => {
         const clickedCellIndex = parseInt(
             clickedCell.getAttribute("data-cell-index")
         );
-
         if (gameState[clickedCellIndex] !== "" || !gameActive) {
             return;
         }
-        
 
-        handleCellPlayed(clickedCell, clickedCellIndex);
-        checkWin();
-        if (currentPlayer === "O" && gameActive) {
-            setTimeout(() => {
-                botMove();
-            },500)
+        if (currentPlayer === "X" && movePlayer === true) {
+            if (gameState[clickedCellIndex] === "O") {
+                return;
+            }
+            handleCellPlayed(clickedCell, clickedCellIndex);
+            checkWin();
+            if (gameActive) {
+                currentPlayer = "O";
+                statusDisplay.innerHTML = currentPlayerTurn();
+                setTimeout(() => {
+                    botMove();
+                    checkWin();
+                    if (gameActive) {
+                        currentPlayer = "X";
+                        statusDisplay.innerHTML = currentPlayerTurn();
+                    }
+                }, 200);
+            }
         }
     }
-
+    
     function resetGame() {
-        gameActive = true;
-        currentPlayer = "X";
-        gameState = ["", "", "", "", "", "", "", "", ""];
-        close.forEach((item, index) => {
-            let duration = 5000 + 500 * index;
-            item.classList.remove("active-circle");
-            translateElem(item, 160, -88, 130, duration);
-        });
-        circle.forEach((item, index) => {
-            let duration = 5000 + 500 * index;
-            item.classList.remove("active-close");
-            translateElem(item, 160, -88, 130, duration);
-        });
-        statusDisplay.innerHTML = currentPlayerTurn();
-        cols.forEach((cell) => {
-            cell.innerHTML = "";
-            for (let i = 0; i <= animationId; i++) {
-                cancelAnimationFrame(i);
+        if (!isReset && gameState.some((cell) => cell.trim() !== "")) {
+            isReset = true;
+            gameActive = true;
+            currentPlayer = "X";
+            movePlayer = true;
+            gameState = ["", "", "", "", "", "", "", "", ""];
+            statusDisplay.innerHTML = currentPlayerTurn();
+
+            close.forEach((item, index) => {
+                let duration = 5000 + 500 * index;
+                item.classList.remove("active-circle");
+                translateElem(item, 160, -88, 130, duration);
+            });
+            circle.forEach((item, index) => {
+                let duration = 5000 + 500 * index;
+                item.classList.remove("active-close");
+                translateElem(item, 160, -88, 130, duration);
+            });
+            setTimeout(() => {
+                cols.forEach((cell) => {
+                    cell.innerHTML = "";
+                        for (let i = 0; i <= animationId; i++) {
+                            cancelAnimationFrame(i);
+                        }
+                        cell.style.transform = "";
+                        cell.style.filter = "";
+                });
+            }, 0);
+
+            setTimeout(() => {
+                isReset = false;
+            }, 100);
+        }
+    }
+    //////////////////////// BOT
+    function blockPlayer() {
+        for (let i = 0; i < winningConditions.length; i++) {
+            const [a, b, c] = winningConditions[i];
+            if (
+                gameState[a] === "X" &&
+                gameState[b] === "X" &&
+                gameState[c] === ""
+            ) {
+                return c;
+            } else if (
+                gameState[a] === "X" &&
+                gameState[b] === "" &&
+                gameState[c] === "X"
+            ) {
+                return b;
+            } else if (
+                gameState[a] === "" &&
+                gameState[b] === "X" &&
+                gameState[c] === "X"
+            ) {
+                return a;
             }
-            cell.style.transform = "";
-            cell.style.filter = "";
-        });
+        }
+        return null;
+    }
+    
+    function checkBotWin() {
+        for (let i = 0; i < winningConditions.length; i++) {
+            const [a, b, c] = winningConditions[i];
+            if (
+                gameState[a] === "O" &&
+                gameState[b] === "O" &&
+                gameState[c] === ""
+            ) {
+                return c;
+            } else if (
+                gameState[a] === "O" &&
+                gameState[b] === "" &&
+                gameState[c] === "O"
+            ) {
+                return b;
+            } else if (
+                gameState[a] === "" &&
+                gameState[b] === "O" &&
+                gameState[c] === "O"
+            ) {
+                return a;
+            }
+        }
+        return null;
     }
 
     function botMove() {
@@ -142,25 +219,27 @@ window.addEventListener("DOMContentLoaded", () => {
                 availableMoves.push(i);
             }
         }
-        const randomIndex = Math.floor(Math.random() * availableMoves.length);
-        const selectedSquare = availableMoves[randomIndex];
-        gameState[selectedSquare] = "O";
-        cols[selectedSquare].innerHTML = currentPlayer;
-        
-        if(checkWin && currentPlayer === 'O') {
-            checkWin();
+        const blockIndex = blockPlayer();
+        const botWinIndex = checkBotWin();
+        if (botWinIndex !== null) {
+            gameState[botWinIndex] = "O";
+            cols[botWinIndex].innerHTML = "O";
+        } else if (blockIndex !== null) {
+            gameState[blockIndex] = "O";
+            cols[blockIndex].innerHTML = "O";
         } else {
-            currentPlayer = "X";
+            const randomIndex = Math.floor(
+                Math.random() * availableMoves.length
+            );
+            const selectedSquare = availableMoves[randomIndex];
+            gameState[selectedSquare] = "O";
+            cols[selectedSquare].innerHTML = "O";
         }
+        movePlayer = !movePlayer;
     }
+    //////////////////////////////////
     /////////// ANIMATION ////////////////
-    function scaleElem(
-        element,
-        scale,
-        duration,
-        minValue,
-        maxValue
-    ) {
+    function scaleElem(element, scale, duration, minValue, maxValue) {
         let start = null;
         let reverse = false;
 
